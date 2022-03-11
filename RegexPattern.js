@@ -18,6 +18,21 @@ class UserValidation {
         }
     }
 
+    //Function To Validate Given Pincodes Using Regex Pattern
+    static checkPincodes() {
+        console.log("\nValidating Pincode's");
+        try {
+            let pincodeArr = ["784 561", "9456123", "abc124", "123456", "A456123", "B78456", "400701"];
+            //Regex pattern for pincode not allowing spaces
+            let pincodePattern = new RegExp('^[0-9]{3}[ ]?[0-9]{3}$');
+            //Testing pincode with pattern using iterate over the array of pincodes
+            UserValidation.iterateOverLoop(pincodeArr, pincodePattern)
+        } catch (e) {
+            //catch the error and print it
+            console.error(e);
+        }
+    }
+
     //Function To Iterate Over An Given Array Of Strings And Check If Its Match The Patter(UC1)
     static iterateOverLoop(inputArr, pattern) {
         for (let input of inputArr) {
@@ -34,13 +49,16 @@ class UserValidation {
 function checkPatterns() {
     console.log("Welcome To The Regex Pattern Program")
     while (true) {
-        console.log("1: Validating Strings Sequences \n2: Exit");
+        console.log("1: Validating Strings Sequences \n2: Validating Pincodes \n3: Exit");
         let choice = parseInt(prompt("Enter a choice from above: "));
         switch (choice) {
             case 1:
                 UserValidation.checkStringSequences();
                 break;
             case 2:
+                UserValidation.checkPincodes();
+                break;
+            case 3:
                 process.exit(1);
             default:
                 console.log("Wrong Choice")
