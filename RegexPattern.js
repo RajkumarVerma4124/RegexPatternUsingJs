@@ -18,7 +18,7 @@ class UserValidation {
         }
     }
 
-    //Function To Validate Given Pincodes Using Regex Pattern
+    //Function To Validate Given Pincodes Using Regex Pattern(UC2)
     static checkPincodes() {
         console.log("\nValidating Pincode's");
         try {
@@ -30,6 +30,25 @@ class UserValidation {
         } catch (e) {
             //catch the error and print it
             console.error(e);
+        }
+    }
+
+    //Function To Validate Given Email Id Using Regex Pattern(UC3)
+    static checkEmailIds() {
+        console.log("\nValidating Email Id's");
+        try {
+            //Get input from user
+            let emailIdArr = ["abc@gmail.com", "abc-100@yahoo.com", "abc.100@yahoo.com", "abc111@yahoo.com", "abc111@abc.com", "abc-100@abc.net", "abc.100@abc.com.au", "abc@1.com", "abc@gmail.com.com", "abc+100@gmail.com",
+                "abc", "abc@.com.my", "abc123@.com", "abc123@.com.com", "abc()*@gmail.com", ".abc@abc.com", "abc@%*.com", "abc..2002@gmail.com", "abc.@gmail.com", "abc@abc@gmail.com", "abc@gmail.com.1a", "abc@gmail.com.aa.au"
+            ];
+            //Regex pattern for email id
+            let emailPattern = new RegExp('^[a-zA-Z0-9]{3,}([._+-][0-9a-zA-Z]{2,})*@[0-9a-zA-Z]+[.]?([a-zA-Z]{2,4})+[.]?([a-zA-Z]{2,3})*$');
+            //Testing email id with pattern using iterate over the array of email ids
+            UserValidation.iterateOverLoop(emailIdArr, emailPattern)
+        } catch (e) {
+            //catch the error and print it
+            console.error(e);
+            checkEmail();
         }
     }
 
@@ -45,11 +64,11 @@ class UserValidation {
     }
 }
 
-//Function To Call Pattern Class Methods To Check It Its Valid Or InValid
+//Function To Call Pattern Class Methods To Check It Its Valid Or InValid(UC1-3)
 function checkPatterns() {
     console.log("Welcome To The Regex Pattern Program")
     while (true) {
-        console.log("1: Validating Strings Sequences \n2: Validating Pincodes \n3: Exit");
+        console.log("1: Validating Strings Sequences  \n2: Validating Pincodes \n3: Validating Email Ids \n4: Exit");
         let choice = parseInt(prompt("Enter a choice from above: "));
         switch (choice) {
             case 1:
@@ -59,6 +78,9 @@ function checkPatterns() {
                 UserValidation.checkPincodes();
                 break;
             case 3:
+                UserValidation.checkEmailIds();
+                break;
+            case 4:
                 process.exit(1);
             default:
                 console.log("Wrong Choice")
